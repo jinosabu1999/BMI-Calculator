@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>BMI Calculator</h1>
+      <div class="input-wrapper">
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" placeholder="Enter your height">
+      </div>
+      <div class="input-wrapper">
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" placeholder="Enter your weight">
+      </div>
+        <button id="calculateBtn" class="calculateBtn"><i class="fas fa-calculator"></i> Calculate</button>
+      <div class="result-card">
+        <div class="result-content">
+          <div class="bmi-value" id="bmiValue"></div>
+          <div class="bmi-category" id="bmiCategory"></div>
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="category-title">BMI Categories</div>
+        <div class="category-item">
+          <div class="category-label">Underweight</div>
+          <div class="category-range">BMI &lt; 18.5</div>
+        </div>
+        <div class="category-item">
+          <div class="category-label">Normal weight</div>
+          <div class="category-range">18.5 ≤ BMI &lt; 25</div>
+        </div>
+        <div class="category-item">
+          <div class="category-label">Overweight</div>
+          <div class="category-range">25 ≤ BMI &lt; 30</div>
+        </div>
+        <div class="category-item">
+          <div class="category-label">Obese</div>
+          <div class="category-range">BMI ≥ 30</div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
