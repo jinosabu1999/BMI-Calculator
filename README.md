@@ -27,7 +27,7 @@
 3. The BMI value will be displayed along with the corresponding weight category.
 4. Explore the modern icons, smooth animations, and futuristic design elements.
 
-## CONTRIBUTING
+## CONTRIBUTIONS
 
 🤝 Contributions are welcome! If you have any ideas, suggestions, or bug reports, please open an issue or submit a pull request.
 
