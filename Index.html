@@ -5,23 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BMI Calculator</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #ff00ff;
+            --background-color: #0a0a2a;
+            --text-color: #ffffff;
+            --container-bg: #1a1a4a;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0a192f;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
             margin: 0;
-            padding: 0;
+            padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            color: var(--text-color);
+            box-sizing: border-box;
         }
 
         .container {
-            max-width: 400px;
-            width: 90%;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            background-color: var(--container-bg);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
             padding: 30px;
             box-sizing: border-box;
             position: relative;
@@ -31,36 +43,43 @@
         h1 {
             text-align: center;
             margin-top: 0;
-            color: #0a192f;
+            color: var(--primary-color);
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             font-size: 24px;
+            margin-bottom: 30px;
         }
 
         .input-wrapper {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
         }
 
         label {
             display: block;
-            margin-bottom: 5px;
-            color: #333333;
+            margin-bottom: 10px;
+            color: var(--text-color);
             font-size: 16px;
+            font-weight: 300;
         }
 
         input[type="number"] {
             width: 100%;
             padding: 12px;
             font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+            border-radius: 10px;
+            border: 2px solid var(--primary-color);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
             box-sizing: border-box;
-            transition: border-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         input[type="number"]:focus {
-            border-color: #0a192f;
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
         }
 
         button {
@@ -68,86 +87,154 @@
             width: 100%;
             padding: 12px;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 10px;
             border: none;
-            color: #ffffff;
-            background-color: #0a192f;
+            color: var(--background-color);
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             cursor: pointer;
-            transition: background-color 0.3s ease;
-            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
         button:hover {
-            background-color: #0f2b49;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         }
 
         .result-container {
             display: none;
-            background-color: #f9c22e;
-            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
             padding: 20px;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            transition: all 0.5s ease;
         }
 
         .bmi-value {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
-            color: #0a192f;
-            margin-bottom: 10px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
         }
 
         .bmi-category {
-            font-size: 18px;
-            color: #333333;
+            font-size: 20px;
+            color: var(--text-color);
             font-style: italic;
         }
 
         .category-card {
-            background-color: #f9c22e;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
             padding: 20px;
             text-align: center;
+            margin-bottom: 25px;
         }
 
         .category-title {
             font-size: 20px;
             font-weight: bold;
-            color: #0a192f;
-            margin-bottom: 10px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         .category-item {
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .category-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .category-label {
             font-weight: bold;
-            color: #333333;
+            color: var(--text-color);
         }
 
         .category-range {
-            color: #333333;
+            color: var(--primary-color);
+        }
+
+        #bmiChart {
+            width: 100%;
+            height: 200px;
+            margin-top: 25px;
         }
 
         .background {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            filter: blur(10px);
+            background: linear-gradient(-45deg, #1a1a4a, #2a2a6a, #3a3a8a, #4a4aaa);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            input[type="number"], button {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .bmi-value {
+                font-size: 24px;
+            }
+
+            .bmi-category {
+                font-size: 18px;
+            }
+
+            .category-title {
+                font-size: 18px;
+            }
+
+            .category-item {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
+<div class="background"></div>
 <div class="container">
     <h1>BMI Calculator</h1>
     <div class="input-wrapper">
@@ -158,7 +245,7 @@
         <label for="weight">Weight (kg):</label>
         <input type="number" id="weight" placeholder="Enter your weight" min="0" step="any">
     </div>
-    <button id="calculateBtn" class="calculateBtn"><i class="fas fa-calculator"></i> Calculate</button>
+    <button id="calculateBtn">Calculate BMI</button>
     <div class="result-container" id="resultContainer">
         <div class="bmi-value" id="bmiValue"></div>
         <div class="bmi-category" id="bmiCategory"></div>
@@ -182,21 +269,34 @@
             <div class="category-range">BMI ≥ 30</div>
         </div>
     </div>
-    <img class="background" src="https://images.unsplash.com/photo-1600181006297-23c99b7d6ebf" alt="Background">
+    <canvas id="bmiChart"></canvas>
 </div>
 
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
 <script>
-    document.getElementById("calculateBtn").addEventListener("click", function() {
+    let bmiChart;
+
+    document.getElementById("calculateBtn").addEventListener("click", calculateBMI);
+    document.getElementById("height").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            document.getElementById("weight").focus();
+        }
+    });
+    document.getElementById("weight").addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {
+            calculateBMI();
+        }
+    });
+
+    function calculateBMI() {
         var height = parseFloat(document.getElementById("height").value);
         var weight = parseFloat(document.getElementById("weight").value);
 
-        if (isNaN(height) || isNaN(weight)) {
+        if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
             document.getElementById("bmiValue").textContent = "Please enter valid values.";
             document.getElementById("bmiCategory").textContent = "";
-            document.getElementById("resultContainer").style.display = "none"; // Hide result container
-           
-        return;
+            document.getElementById("resultContainer").style.display = "block";
+            return;
         }
 
         var bmi = weight / ((height / 100) ** 2);
@@ -211,16 +311,63 @@
         } else {
             category = "Obese";
         }
-        if (Math.abs(bmi - 18.5) < 0.01) {
-            category = "Normal weight";
-        }
 
         var bmiValue = bmi.toFixed(2);
 
         document.getElementById("bmiValue").textContent = "BMI: " + bmiValue;
         document.getElementById("bmiCategory").textContent = "Category: " + category;
-        document.getElementById("resultContainer").style.display = "block"; // Show result container
-    });
+        document.getElementById("resultContainer").style.display = "block";
+
+        updateChart(bmi);
+    }
+
+    function updateChart(bmi) {
+        const ctx = document.getElementById('bmiChart').getContext('2d');
+
+        if (bmiChart) {
+            bmiChart.destroy();
+        }
+
+        bmiChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Your BMI', 'Underweight', 'Normal', 'Overweight', 'Obese'],
+                datasets: [{
+                    label: 'BMI Range',
+                    data: [bmi, 18.5, 25, 30, 35],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.8)',
+                        'rgba(54, 162, 235, 0.8)',
+                        'rgba(75, 192, 192, 0.8)',
+                        'rgba(255, 206, 86, 0.8)',
+                        'rgba(153, 102, 255, 0.8)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 40
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>
